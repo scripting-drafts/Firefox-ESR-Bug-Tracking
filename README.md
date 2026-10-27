@@ -100,7 +100,7 @@ The proposed fix should be considered experimental until its behavior is verifie
 
 ## Status Update
 
-Navigating moxfield without the affected CPUs![https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main] display the following results:
+Navigating moxfield without the [affected CPUs](https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main) display the following results:
 
 ```text
 taskset -c 0,1,3-7,9-11 firefox-esr --no-remote
