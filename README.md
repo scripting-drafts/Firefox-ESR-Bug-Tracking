@@ -97,3 +97,25 @@ The proposed fix should be considered experimental until its behavior is verifie
 **Fix:** Proposed; validation required.
 
 **Affected components:** Gecko, WebRender, display-list construction, and hash-table iteration.
+
+## Status Update
+
+Navigating moxfield without the affected CPUs![https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main] display the following results:
+
+```text
+Average CPU: 108.1%
+Peak over 1 second: 246.2%
+Capture duration: 5.82 s
+```
+
+```text
+taskset -c 0,1,3-7,9-11 firefox-esr --no-remote
+```
+
+It is confirmed (19.56 27 Oct) that Moxfield can drive heavy parallel rendering activity without causing Firefox to hang.
+
+### Available next steps
+ - Finding the exact threads using the CPU
+ - Refining a Firefox Profiler values
+ - Testing wether DOM mutations are excessive
+ - Running controlled isolation tests
