@@ -100,7 +100,7 @@ The proposed fix should be considered experimental until its behavior is verifie
 
 ## Status Update
 
-Navigating with the [CPUs that affect Moxfield behavior](https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main) display the following results:
+Navigating Moxfield with the [CPUs that affect the users experience behavior](https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main) display the following results:
 
 | Property | CPU 2 crash | CPU 8 crash |
 |---|---|---|
