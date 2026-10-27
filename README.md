@@ -100,7 +100,18 @@ The proposed fix should be considered experimental until its behavior is verifie
 
 ## Status Update
 
-Navigating moxfield without the [affected CPUs](https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main) display the following results:
+Navigating moxfield with the [CPUs that affect Moxfield behavior](https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main) display the following results:
+
+| Property | CPU 2 crash | CPU 8 crash |
+|---|---|---|
+| **Process** | Isolated Web Content | Isolated Web Content |
+| **Faulting function** | `SnowWhiteKiller::Visit` | `CustomEvent_Binding::get_detail` |
+| **Subsystem** | Cycle collector | DOM / JavaScript |
+| **Fault type** | General protection fault | Invalid memory write |
+| **Last page** | `/decks` | `/playtest` |
+| **Physical core** | 2 | 2 |
+
+Although without the mentioned CPUs, it is confirmed (19.56 27 Oct) that Moxfield can drive heavy parallel rendering activity without causing Firefox to hang.
 
 ```text
 taskset -c 0,1,3-7,9-11 firefox-esr --no-remote
@@ -112,9 +123,7 @@ Peak over 1 second: 246.2%
 Capture duration: 5.82 s
 ```
 
-It is confirmed (19.56 27 Oct) that Moxfield can drive heavy parallel rendering activity without causing Firefox to hang.
-
-### Available next steps
+### Available next steps for testing Moxfield on CPUs that don't trigger Cycle Collector nor DOM / Javascript faults
  - Finding the exact threads using the CPU
  - Refining a Firefox Profiler values
  - Testing wether DOM mutations are excessive
