@@ -103,13 +103,13 @@ The proposed fix should be considered experimental until its behavior is verifie
 Navigating moxfield without the affected CPUs![https://github.com/scripting-drafts/CPU-Stress-Tests/tree/main] display the following results:
 
 ```text
-Average CPU: 108.1%
-Peak over 1 second: 246.2%
-Capture duration: 5.82 s
+taskset -c 0,1,3-7,9-11 firefox-esr --no-remote
 ```
 
 ```text
-taskset -c 0,1,3-7,9-11 firefox-esr --no-remote
+Average CPU: 108.1%
+Peak over 1 second: 246.2%
+Capture duration: 5.82 s
 ```
 
 It is confirmed (19.56 27 Oct) that Moxfield can drive heavy parallel rendering activity without causing Firefox to hang.
