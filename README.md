@@ -4,7 +4,7 @@
 
 [webcompat/web-bugs#238716](https://github.com/webcompat/web-bugs/issues/238716)
 
-## Symptoms
+## Initial Symptoms
 
 - Firefox becomes unresponsive while interacting with or refreshing Moxfield.
 - The affected Firefox process can reach **100% CPU usage**.
@@ -123,7 +123,7 @@ Peak over 1 second: 246.2%
 Capture duration: 5.82 s
 ```
 
-### Possible next steps for testing Moxfield on CPUs that don't trigger Cycle Collector nor DOM / Javascript faults
+### Pending next steps for testing Moxfield on CPUs that don't trigger Cycle Collector nor DOM / Javascript faults
  - Finding the exact threads using the CPU
  - Refining a Firefox Profiler values
  - Testing wether DOM mutations are excessive
@@ -223,7 +223,7 @@ The second possibility is particularly interesting because the register discrepa
 | `CustomEvent_Binding::get_detail` | Yes. Stop further execution after an invalid memory write | Not established |
 | `CompositorBridgeChild` abnormal IPC shutdown | Yes. Isolating a failed child process limits damage | Generally a consequence of process failure, not evidence of its original cause |
 
-## A defensive approach to bear with security faults
+## A defensive proposal to bear with security faults
 
 Vulnerable code
 ```text
