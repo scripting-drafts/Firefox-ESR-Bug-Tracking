@@ -133,7 +133,7 @@ Capture duration: 5.82 s
 
 Evidence demonstrates a single-bit discrepancy in an array index, not yet definitive proof that physical CPU core 2 flipped the bit.
 
-### Firefox crash observation — suspected bit flip
+### Firefox crash observation — alleged bit flip
 
 | Property | Observed value |
 |---|---|
@@ -148,7 +148,7 @@ Evidence demonstrates a single-bit discrepancy in an array index, not yet defini
 | Divergent bit | 24 |
 | Signal | `SIGSEGV` |
 
-Bitflip:
+### Bitflip
 ```text
 Expected: 0x0019B707
 Observed: 0x0119B707
@@ -156,7 +156,7 @@ Observed: 0x0119B707
 XOR:      0x01000000 = 2^24
 ```
 
-Index memory read:
+### Index memory read
 ```text
 RDX = 0x7f4a29600000
 RCX = 0x0119b707
@@ -172,7 +172,7 @@ Calculated address:
 TLDR; The processor attempted to read a location outside the allocated deque because the effective index contained an additional set bit
 
 
-Involved parts of the code:
+### Involved parts of the code
 ```text
 
 void* nsDequeBase::PopFront() {
@@ -196,7 +196,7 @@ void* nsDequeBase::PopFront() {
 ```
 [Relevant implementation in the Firefox-ESR branch](https://github.com/mozilla-firefox/firefox/blob/esr140/xpcom/ds/nsDeque.cpp?utm_source=chatgpt.com)
 
-The following invariant check leads to the next ambivalent RCA:
+The following invariant check leads to an ambivalent RCA:
 ```text
 NS_ASSERTION(mOrigin < mCapacity, "Error: Bad origin");
 ```
@@ -225,13 +225,13 @@ The second possibility is particularly interesting because the register discrepa
 
 ## A defensive proposal to bear with security faults
 
-Vulnerable code
+### Current code
 ```text
 NS_ASSERTION(mOrigin < mCapacity, "Error: Bad origin");
 result = mData[mOrigin];
 ```
 
-The following development would make Firefox stop if the invalid index is already detectable at that check
+### The following code would make Firefox shutdown gracefully if the invalid index is already detectable at the NS_ASSERTION check
 ```text
 MOZ_RELEASE_ASSERT(
     mOrigin < mCapacity,
