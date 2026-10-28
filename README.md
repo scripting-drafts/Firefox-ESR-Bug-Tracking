@@ -111,9 +111,6 @@ Navigating Moxfield with the [CPUs that affect the users experience behavior](ht
 | **Last page** | `/decks` | `/playtest` |
 | **Physical core** | 2 | 2 |
 
-## Assumptions
-The CPU 2 occasionally produces incorrect computations or corrupts data, causing valid Firefox code to fail.
-
 Without the mentioned CPUs, it is confirmed (19.56 27 Oct) that Moxfield can drive heavy parallel rendering activity without causing Firefox to hang.
 
 ```text
