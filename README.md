@@ -215,3 +215,31 @@ The second possibility is particularly interesting because the register discrepa
 
 ***Observation***: Firefox can deliberately terminate a process for security reasons when it detects an unsafe internal state. In fact, Firefox already uses this strategy in some situations. Mozilla documents controlled crashes through MOZ_CRASH and MOZ_RELEASE_ASSERT, as well as deliberate termination of content processes that send invalid IPC messages.
 
+### Crashes overview
+| Crash location | Security rationale for termination | Observed cause |
+|---|---|---|
+| `nsDequeBase::PopFront` | Yes. Prevent further use of a corrupted deque | No. Observed invalid memory access |
+| `SnowWhiteKiller::Visit` | Yes. Avoid continuing with potentially corrupted object references | Not established |
+| `CustomEvent_Binding::get_detail` | Yes. Stop further execution after an invalid memory write | Not established |
+| `CompositorBridgeChild` abnormal IPC shutdown | Yes. Isolating a failed child process limits damage | Generally a consequence of process failure, not evidence of its original cause |
+
+## A defensive approach to bear with security faults
+
+Vulnerable code
+```text
+NS_ASSERTION(mOrigin < mCapacity, "Error: Bad origin");
+result = mData[mOrigin];
+```
+
+The following development would make Firefox stop if the invalid index is already detectable at that check
+```text
+MOZ_RELEASE_ASSERT(
+    mOrigin < mCapacity,
+    "Corrupted deque index"
+);
+
+result = mData[mOrigin];
+```
+
+### Conclusion 10.59 28 Oct
+The safest strategy is not to make Firefox ignore errors. It is to combine hardware isolation with intentional process termination when corruption is detected.
