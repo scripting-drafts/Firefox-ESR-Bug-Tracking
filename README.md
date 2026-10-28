@@ -1,4 +1,4 @@
-# Firefox ESR — Bug Tracking (Gecko/WebRende & Memory-Access)
+# Firefox ESR — Bug Tracking (Gecko/WebRender & Memory-Access)
 
 ## Related Issue
 
