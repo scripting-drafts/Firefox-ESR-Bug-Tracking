@@ -129,13 +129,14 @@ Capture duration: 5.82 s
  - Testing wether DOM mutations are excessive
  - Running controlled isolation tests
 
-The test results were anecdotical:
-
 Affinity mask:
+
 ```text
 Allowed:  0,1,3,4,5,6,7,9,10,11
 Excluded: 2,8
 ```
+
+Anecdotical test results:
 
 | Measurement | Result |
 |---|---|
@@ -146,7 +147,6 @@ Excluded: 2,8
 | Average utilization per permitted CPU | 9.7–12.6% |
 | Firefox average aggregate CPU usage | Approximately 45% of one logical CPU |
 | Peak sampled Firefox CPU usage | Approximately 499% across multiple threads |
-
 
 ## Status Update - 10.26 28 Oct
 
