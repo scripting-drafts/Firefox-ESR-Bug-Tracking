@@ -123,11 +123,30 @@ Peak over 1 second: 246.2%
 Capture duration: 5.82 s
 ```
 
-### Pending next steps for testing Moxfield on CPUs that don't trigger Cycle Collector nor DOM / Javascript faults
+### Steps for testing Moxfield on CPUs that don't trigger Cycle Collector nor DOM / Javascript faults
  - Finding the exact threads using the CPU
  - Refining a Firefox Profiler values
  - Testing wether DOM mutations are excessive
  - Running controlled isolation tests
+
+The test results were anecdotical:
+
+Affinity mask:
+```text
+Allowed:  0,1,3,4,5,6,7,9,10,11
+Excluded: 2,8
+```
+
+| Measurement | Result |
+|---|---|
+| SHA-256 canary checks | Approximately 460,000 across 10 CPUs |
+| Integrity mismatches | 0 |
+| CPU thermal maximum (`Tccd1`) | 72.0°C |
+| CPU control temperature maximum (`Tctl`) | 68.1°C |
+| Average utilization per permitted CPU | 9.7–12.6% |
+| Firefox average aggregate CPU usage | Approximately 45% of one logical CPU |
+| Peak sampled Firefox CPU usage | Approximately 499% across multiple threads |
+
 
 ## Status Update - 10.26 28 Oct
 
